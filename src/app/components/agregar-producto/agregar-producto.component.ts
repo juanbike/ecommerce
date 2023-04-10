@@ -1,33 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductoService} from '../../service/producto.service';
-import { Producto } from 'src/app/data/producto';
+import { NotificacionesService } from 'src/app/service/notificaciones.service';
+
+import { ToastrService, GlobalConfig } from 'ngx-toastr';
 @Component({
   selector: 'app-agregar-producto',
   templateUrl: './agregar-producto.component.html',
   styleUrls: ['./agregar-producto.component.css']
 })
 export class AgregarProductoComponent  {
-  productoForm: any;
+ 
   
 
-  constructor(private productoService: ProductoService){}
-  OnInit(){
-    const productoForm = new FormGroup({
-      nombre: new FormControl('', Validators.required),
-      descripcion: new FormControl(''),
-      precio: new FormControl('', Validators.required)
-    });
+  // ININICIALIZAMOS PRODUCT
+  product = {
+    nombre: '',
+    descripcion: '',
+    precio: 0
+  };
+
+
+
+  constructor(private productoService: ProductoService, private notifyService : NotificacionesService){
+    
   }
-
-  onSubmit() {
-    const nuevoProducto = {
-      nombre: this.productoForm.value.nombre,
-      descripcion: this.productoForm.value.descripcion,
-      precio: this.productoForm.value.precio
-    };
-
-    this.productoService.agregarProducto(nuevoProducto);
-  this.productoForm.reset();
+  
+ 
+onSubmit() {
+  this.productoService.agregarProducto(this.product).subscribe(
+    response => {
+      console.log('Producto agregado:', response);
+      
+      this.notifyService.showSuccess("Producto agregado", "Exitozamente")
+    },
+    error => {
+      console.error('Error al agregar el producto:', error);
+      this.notifyService.showError("Error al agregar el prducto", "verifique conexión a internet")
+    }
+  );
 }
+
 }
+
+
