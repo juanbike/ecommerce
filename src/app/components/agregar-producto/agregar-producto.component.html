@@ -1,0 +1,23 @@
+
+<h2>Agregar Producto</h2>
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" formControlName="nombre">
+    <div *ngIf="productoForm.get('nombre').invalid && productoForm.get('nombre').touched">
+      El nombre es obligatorio.
+    </div>
+  </div>
+  <div>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" formControlName="descripcion"></textarea>
+  </div>
+  <div>
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" formControlName="precio">
+    <div *ngIf="productoForm.get('precio').invalid && productoForm.get('precio').touched">
+      El precio es obligatorio.
+    </div>
+  </div>
+  <button type="submit">Agregar</button>
+</form>
