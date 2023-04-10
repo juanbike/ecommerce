@@ -31,7 +31,7 @@ onSubmit() {
     response => {
       console.log('Producto agregado:', response);
       
-      this.notifyService.showSuccess("Producto agregado", "Exitozamente")
+      this.notifyService.showSuccess("Producto agregado", "Exitosamente")
     },
     error => {
       console.error('Error al agregar el producto:', error);
