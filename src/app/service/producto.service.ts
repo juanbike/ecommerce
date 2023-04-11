@@ -32,6 +32,8 @@ export class ProductoService {
     );
   }
 
+
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       //console.error(`${operation} failed: ${error.message}`);
@@ -41,21 +43,17 @@ export class ProductoService {
   }
   */
 
-  agregarProducto(product: any):void{
-    this.http.post(this.apiUrl, product).pipe(
-      try {
-        console.log('Conexión HTTP exitosa');
-      } catch (error) {
-        
-        console.log('Error de conexión HTTP');
-        // Aquí puedes agregar el código para manejar el error
-      }
-    );
+  agregarProducto(product: any) {
+    return this.http.post(this.apiUrl, product)
+    
+  }
+
+  
   }
 
 
   
-}
+
 
 /* ------------------------------ EXPLICAION DEL METODO AGREGARPRODUCTO --------------------------------------
 Este es un ejemplo de un método en un servicio Angular llamado agregarProducto(), que se encarga de agregar un nuevo producto a través de una solicitud HTTP POST a un servidor externo.
