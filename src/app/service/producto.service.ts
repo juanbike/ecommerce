@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Producto } from '../data/producto';
@@ -25,35 +25,27 @@ export class ProductoService {
     return this.http.get<Producto[]>(this.apiUrl);
   }
 
-/*
+
   agregarProducto(product: any) {
     return this.http.post(this.apiUrl, product).pipe(
             catchError(this.handleError<Producto>())
     );
   }
 
-
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       //console.error(`${operation} failed: ${error.message}`);
-      this.notifyService.showError("Error de conexion", "verifique Internet")
+      this.notifyService.showError(`${operation} failed: ${error.message}`, "Error al agregar el producto")
       return of(result as T);
     };
   }
-  */
-
-  agregarProducto(product: any) {
-    return this.http.post(this.apiUrl, product)
-    
-  }
-
   
-  }
-
 
   
 
+
+  
+}
 
 /* ------------------------------ EXPLICAION DEL METODO AGREGARPRODUCTO --------------------------------------
 Este es un ejemplo de un método en un servicio Angular llamado agregarProducto(), que se encarga de agregar un nuevo producto a través de una solicitud HTTP POST a un servidor externo.

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { OnlineStatusModule } from 'ngx-online-status';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,7 +35,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
      ReactiveFormsModule,
      RouterModule.forRoot([]),
      BrowserAnimationsModule,
-     ToastrModule.forRoot()
+     ToastrModule.forRoot(),
+     OnlineStatusModule
   ],
   providers: [],
   bootstrap: [AppComponent]

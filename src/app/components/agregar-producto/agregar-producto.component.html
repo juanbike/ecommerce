@@ -1,3 +1,4 @@
+<!--------
 <form (ngSubmit)="onSubmit()">
   <div>
     <label for="name">Nombre:</label>
@@ -17,3 +18,24 @@
   </div>
   <button type="submit">Agregar producto</button>
 </form>
+--------->
+
+<h1>Estado del protocolo HTTP: {{ httpStatus }}</h1>
+
+<div class="status" [class.offline]="status === onlineStatusCheck.OFFLINE"></div>
+
+<div style="text-align:center">
+  <h1>
+    Detect Internet Status Online Offline Demo
+  </h1>
+  <h2>
+    Use third party liary :
+  </h2>
+  <a href="https://www.npmjs.com/package/ngx-online-status" rel="nofollow" target="_blank">npm/ngx-online-status
+  </a>
+  <h3>Steps to test the functionality</h3>
+  <p>
+    Just turn <span style="color:#11d411">ON</span> and
+    <span style="color:rgb(231, 14, 14)">OFF</span> your Internet connection.
+  </p>
+</div>

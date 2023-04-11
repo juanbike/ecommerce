@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +11,7 @@ export class CheckHttpService {
 
   constructor(private http: HttpClient) { }
 
+/*
   public checkConnection(): Observable<boolean> {
     return this.http.get<boolean>(this.apiURL).pipe(
       map(() => false),
@@ -19,7 +20,26 @@ export class CheckHttpService {
     );
   
   }
+
+*/
+
+
+
+public checkConnection(): Observable<boolean> {
+  return this.http.get<boolean>('https://www.google.com').pipe(
+   catchError(() => of(false)),  map(() => true)
+  );
 }
+
+
+
+
+}
+
+
+
+
+
 
 /*
 En este método, se envía una solicitud HTTP GET a la URL de la API de productos y se espera una

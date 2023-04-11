@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService} from '../../service/producto.service';
 import { NotificacionesService } from 'src/app/service/notificaciones.service';
 import { CheckHttpService } from 'src/app/service/check-http.service'; 
+import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
+
 
 @Component({
   selector: 'app-agregar-producto',
@@ -9,7 +11,9 @@ import { CheckHttpService } from 'src/app/service/check-http.service';
   styleUrls: ['./agregar-producto.component.css']
 })
 export class AgregarProductoComponent  {
- 
+  httpStatus: boolean = true;
+  status: OnlineStatusType = 0; //Enum provided by ngx-online-status
+  onlineStatusCheck: any = OnlineStatusType;
   
 
   // ININICIALIZAMOS PRODUCT
@@ -20,10 +24,15 @@ export class AgregarProductoComponent  {
   };
 
 
-
+//INYECTAMOS LOS SERVICIOS EN EL CONSTRUCTOR
   constructor(private productoService: ProductoService, private notifyService : NotificacionesService, 
-    private checkHttpService:CheckHttpService ){
-    
+    private checkHttpService:CheckHttpService, private onlineStatusService: OnlineStatusService ){
+      this.onlineStatusService.status.subscribe((status: OnlineStatusType) => {
+        // Retrieve Online status Type
+        this.status = status;
+        console.log("Internet esta:",this.status)
+        this.notifyService.showInfo("Internet esta, `{this.status}`", "Mensaje")
+      });
   }
   
 /* 
@@ -42,6 +51,8 @@ onSubmit() {
 }
 */
 
+
+/*
 onSubmit(){
   this.checkHttpService
     .checkConnection()
@@ -49,12 +60,24 @@ onSubmit(){
       
       if (connected) {
           this.notifyService.showSuccess("Producto agregado", "Exitosamente");
-          this.productoService.agregarProducto(this.product).subscribe();
+         
       } else {
         this.notifyService.showError("Error al agregar el producto", "verifique conexión a internet")
       }
     })
 
 }
+
+*/
+
+ngOnInit() {
+  this.checkHttpService.checkConnection().subscribe(status => {
+    this.httpStatus = status;
+  });
+}
+
+
+
+
 
 }
